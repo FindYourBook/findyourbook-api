@@ -1,6 +1,6 @@
 import * as yup from "yup"
 import { SchemaOf } from "yup"
-import { IUserRequest } from "../interfaces/users.interfaces"
+import { ISessionRequest, IUserRequest } from "../interfaces/users.interfaces"
 
 const createUserSerializer: SchemaOf<IUserRequest> = yup.object().shape({
     email: yup.string().email().required(),
@@ -9,6 +9,12 @@ const createUserSerializer: SchemaOf<IUserRequest> = yup.object().shape({
     isAdm: yup.boolean().required()
 })
 
+const sessionSerializer: SchemaOf<ISessionRequest> = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+})
+
 export {
-    createUserSerializer
+    createUserSerializer,
+    sessionSerializer
 }

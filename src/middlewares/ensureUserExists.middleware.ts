@@ -6,15 +6,19 @@ import AppError from "../errors/AppError"
 
 const ensureUserExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const userData: IUserRequest = req.body
-    const usersRepository = AppDataSource.getRepository(Users)
 
-    const user = await usersRepository.findOneBy({
-        email: userData.email
-    })
+    const user = await AppDataSource.createQueryBuilder()
+    .where('users.email = :userEmail', { userEmail: userData.email })
+    .select()
+    .from(Users, 'users').getRawOne()
 
-    if (user) {
+    res.locals.user = user
+
+    if (!userData.name && user) {
+        return next()
+    } else if (userData.name && user) {
         throw new AppError("User already exists.", 409)
-    }   
+    }
     return next()
 }
 
