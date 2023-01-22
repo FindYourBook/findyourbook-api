@@ -5,6 +5,12 @@ interface IUserRequest {
     isAdm: boolean
 }
 
+interface ISessionRequest {
+    email: string,
+    password: string
+}
+
 export {
-    IUserRequest
+    IUserRequest,
+    ISessionRequest
 }
