@@ -43,7 +43,7 @@ class Users {
     }
 
     @OneToMany(() => Posts, posts => posts.user)
-    posts: Posts
+    posts: Posts[]
 }
 
 export default Users
