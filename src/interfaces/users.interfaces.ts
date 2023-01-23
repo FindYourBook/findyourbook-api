@@ -10,7 +10,13 @@ interface ISessionRequest {
     password: string
 }
 
+interface IToken {
+    id: string,
+    isAdm: boolean
+}
+
 export {
     IUserRequest,
-    ISessionRequest
+    ISessionRequest,
+    IToken
 }
