@@ -5,7 +5,7 @@ import Users from "../../entities/users.entities"
 import AppError from "../../errors/AppError"
 import jwt from "jsonwebtoken"
 
-const sessionService = async (userData: ISessionRequest, userFromDatabase: Users) => {
+const sessionService = async (userData: ISessionRequest, userFromDatabase: Users): Promise<{ token: string }> => {
     try {
         const userDataValidated = await sessionSerializer.validate(userData, {
             stripUnknown: true,
