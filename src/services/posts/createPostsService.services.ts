@@ -3,11 +3,11 @@ import Posts from "../../entities/posts.entitites"
 import Users from "../../entities/users.entities"
 import AppError from "../../errors/AppError"
 import { IPostRequest } from "../../interfaces/posts.interfaces"
-import { createPostsSerializer } from "../../serializers/posts.serializers"
+import { postsSerializer } from "../../serializers/posts.serializers"
 
 const createPostsService = async (userId: string, postData: IPostRequest): Promise<Posts> => {
     try {
-        const postDataValidated = await createPostsSerializer.validate(postData, {
+        const postDataValidated = await postsSerializer.validate(postData, {
             stripUnknown: true,
             abortEarly: false
         })

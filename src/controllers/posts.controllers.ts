@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { IPostRequest } from "../interfaces/posts.interfaces"
 import createPostsService from "../services/posts/createPostsService.services"
+import updatePostsService from "../services/posts/updatePostsService.services"
 import getAllPostsService from "../services/posts/getAllPostsService.services"
 
 const createPostsController = async (req: Request, res: Response) => {
@@ -11,6 +12,14 @@ const createPostsController = async (req: Request, res: Response) => {
     return res.status(201).json(createdPost)
 }
 
+const updatePostsController = async (req: Request, res: Response) => {
+    const postData: IPostRequest = req.body
+    const foundPost = res.locals.foundPost
+
+    const updatedPost = await updatePostsService(postData, foundPost)
+    return res.status(200).json(updatedPost)
+}
+
 const getAllPostsController = async (req: Request, res: Response) => {
     const allPosts = await getAllPostsService()
     return res.status(200).json(allPosts)
@@ -18,5 +27,6 @@ const getAllPostsController = async (req: Request, res: Response) => {
 
 export {
     createPostsController,
+    updatePostsController,
     getAllPostsController
 }

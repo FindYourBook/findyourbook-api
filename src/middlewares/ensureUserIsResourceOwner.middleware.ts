@@ -8,7 +8,7 @@ const ensureUserIsResourceOwnerMiddleware = (req: Request, res: Response, next: 
     if (idFromRoute === idFromToken) {
         return next()
     }
-    throw new AppError("You don't have access to this information.", 403)
+    throw new AppError("You do not have access to this information.", 403)
 }
 
 export default ensureUserIsResourceOwnerMiddleware
