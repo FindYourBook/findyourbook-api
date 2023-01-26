@@ -3,6 +3,7 @@ import { IPostRequest } from "../interfaces/posts.interfaces"
 import createPostsService from "../services/posts/createPostsService.services"
 import updatePostsService from "../services/posts/updatePostsService.services"
 import getAllPostsService from "../services/posts/getAllPostsService.services"
+import deletePostsService from "../services/posts/deletePostsService.services"
 
 const createPostsController = async (req: Request, res: Response) => {
     const userId: string = res.locals.userTokenData.id
@@ -25,8 +26,16 @@ const getAllPostsController = async (req: Request, res: Response) => {
     return res.status(200).json(allPosts)
 }
 
+const deletePostsController = async (req: Request, res: Response) => {
+    const postId = req.params.id
+
+    await deletePostsService(postId)
+    return res.status(204).send()
+}
+
 export {
     createPostsController,
     updatePostsController,
-    getAllPostsController
+    getAllPostsController,
+    deletePostsController
 }
