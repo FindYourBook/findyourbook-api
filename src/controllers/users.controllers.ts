@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { ISessionRequest, IUserRequest } from "../interfaces/users.interfaces"
 import createUserService from "../services/users/createUserService.services"
+import deleteUserService from "../services/users/deleteUserService.services"
 import getUserProfileService from "../services/users/getUserProfileService.services"
 import sessionService from "../services/users/sessionService.services"
 
@@ -26,8 +27,16 @@ const getUserProfileController = async (req: Request, res: Response) => {
     return res.status(200).json(foundUser)
 }
 
+const deleteUserController = async (req: Request, res: Response) => {
+    const userId = req.params.id
+
+    await deleteUserService(userId)
+    return res.status(204).send()
+}
+
 export { 
     createUserController,
     sessionController,
-    getUserProfileController
+    getUserProfileController,
+    deleteUserController
 }

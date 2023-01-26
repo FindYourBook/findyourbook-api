@@ -31,11 +31,6 @@ class Users {
     @DeleteDateColumn()
     deletedAt: Date
 
-    @BeforeRemove()
-    isActiveChanged() {
-        this.isActive = false
-    }
-
     @BeforeUpdate()
     @BeforeInsert()
     hashPassword() {
