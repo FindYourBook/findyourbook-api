@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { IPostRequest } from "../interfaces/posts.interfaces"
 import createPostsService from "../services/posts/createPostsService.services"
+import updatePostsService from "../services/posts/updatePostsService.services"
 
 const createPostsController = async (req: Request, res: Response) => {
     const userId: string = res.locals.userTokenData.id
@@ -10,6 +11,15 @@ const createPostsController = async (req: Request, res: Response) => {
     return res.status(201).json(createdPost)
 }
 
+const updatePostsController = async (req: Request, res: Response) => {
+    const postData: IPostRequest = req.body
+    const foundPost = res.locals.foundPost
+
+    const updatedPost = await updatePostsService(postData, foundPost)
+    return res.status(200).json(updatedPost)
+}
+
 export {
-    createPostsController
+    createPostsController,
+    updatePostsController
 }
