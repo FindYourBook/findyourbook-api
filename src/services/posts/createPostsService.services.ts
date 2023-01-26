@@ -5,7 +5,7 @@ import AppError from "../../errors/AppError"
 import { IPostRequest } from "../../interfaces/posts.interfaces"
 import { postsSerializer } from "../../serializers/posts.serializers"
 
-const createPostsService = async (userId: string, postData: IPostRequest) => {
+const createPostsService = async (userId: string, postData: IPostRequest): Promise<Posts> => {
     try {
         const postDataValidated = await postsSerializer.validate(postData, {
             stripUnknown: true,
