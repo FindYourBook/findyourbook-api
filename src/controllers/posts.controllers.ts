@@ -4,6 +4,7 @@ import createPostsService from "../services/posts/createPostsService.services"
 import updatePostsService from "../services/posts/updatePostsService.services"
 import getAllPostsService from "../services/posts/getAllPostsService.services"
 import deletePostsService from "../services/posts/deletePostsService.services"
+import deleteOlderPostsService from "../services/posts/deleteOlderPostsService.services"
 
 const createPostsController = async (req: Request, res: Response) => {
     const userId: string = res.locals.userTokenData.id
@@ -33,9 +34,15 @@ const deletePostsController = async (req: Request, res: Response) => {
     return res.status(204).send()
 }
 
+const deleteOlderPostsController = async (req: Request, res: Response) => {
+    await deleteOlderPostsService()
+    return res.status(204).send()
+}
+
 export {
     createPostsController,
     updatePostsController,
     getAllPostsController,
-    deletePostsController
+    deletePostsController,
+    deleteOlderPostsController
 }

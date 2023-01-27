@@ -21,13 +21,13 @@ class Posts {
     @Column()
     picture: string
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: "date" })
     createdOn: Date
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: "date" })
     updatedAt: Date
 
-    @DeleteDateColumn()
+    @DeleteDateColumn({ type: "date" })
     deletedAt: Date
 
     @ManyToOne(() => Users, users => users.posts)
