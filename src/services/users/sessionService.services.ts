@@ -11,7 +11,7 @@ const sessionService = async (userData: ISessionRequest, userFromDatabase: Users
             stripUnknown: true,
             abortEarly: false
         })
-
+        
         const comparedPassword = await compare(userDataValidated.password, userFromDatabase.password)
        
         if (!comparedPassword) {
