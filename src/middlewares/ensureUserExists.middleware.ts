@@ -8,9 +8,10 @@ const ensureUserExistsMiddleware = async (req: Request, res: Response, next: Nex
     const userData: IUserRequest = req.body
 
     const user = await AppDataSource.createQueryBuilder()
-    .where("users.email = :userEmail", { userEmail: userData.email })
     .select()
-    .from(Users, "users").getRawOne()
+    .where("users.email = :userEmail", { userEmail: userData.email })
+    .from(Users, "users")
+    .getRawOne()
 
     res.locals.user = user
 
